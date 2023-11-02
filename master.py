@@ -1,5 +1,5 @@
 import streamlit as st
-import matplotlib.pyplot as plt
+import pandas as pd
 
 @st.cache_data
 def carregar_dados():
