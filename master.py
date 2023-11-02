@@ -12,5 +12,8 @@ ax.imshow(data)
 # Adiciona um título ao mapa
 ax.set_title("Mapa do Rio Grande do Norte")
 
-# Mostra o mapa
-st.pyplot(fig)
+# Adiciona um widget de seleção de dados
+point = st.selectbox("Selecione um ponto do mapa", data[:, 0], data[:, 1])
+
+# Mostra informações sobre o ponto selecionado
+st.write("O ponto selecionado é:", point)
