@@ -1,7 +1,5 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-import folium
-import requests
 
 @st.cache_data
 def carregar_dados():
