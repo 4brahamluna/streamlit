@@ -1,19 +1,25 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-import numpy as np
+import folium
+import requests
 
-# Importa os dados do mapa do Rio Grande do Norte
-data = np.loadtxt("mapa_rn.csv", delimiter=",")
+# Importar os dados do mapa
+dados_mapa = pd.read_csv("mapa_rn.csv")
 
-# Cria um mapa do Rio Grande do Norte
-fig, ax = plt.subplots(1, 1)
-ax.imshow(data)
+# Criar um mapa do Rio Grande do Norte
+mapa = folium.Map(location=[-5.18, -36.94], zoom_start=7)
 
-# Adiciona um título ao mapa
-ax.set_title("Mapa do Rio Grande do Norte")
+# Adicionar os municípios do Rio Grande do Norte ao mapa
+for municipio in dados_mapa.itertuples():
 
-# Adiciona um widget de seleção de dados
-point = st.selectbox("Selecione um ponto do mapa", data[:, 0], data[:, 1])
+    # Fazer uma solicitação HTTP ao site do IBGE
+    resposta = requests.get(f"https://geoftp.ibge.gov.br/mapas/bases_cartograficas/malhas_municipais/municipios_2023/png/{municipio.ibge}.png")
 
-# Mostra informações sobre o ponto selecionado
-st.write("O ponto selecionado é:", point)
+    # Armazenar a imagem na memória
+    imagem = resposta.content
+
+    # Adicionar a imagem ao mapa
+    folium.Marker([municipio.latitude, municipio.longitude], popup=municipio.nome, icon=folium.Icon(image=imagem)).add_to(mapa)
+
+# Exibir o mapa
+st.write(mapa)
