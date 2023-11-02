@@ -1,13 +1,21 @@
-import folium
-import streamlit as st
+#IMPORTANDO A BIBLIOTECA
+import googlemaps
 
-from streamlit_folium import st_folium
+#INSERINDO SUA KEY PARA CONSULTA DO GOOGLE MAPS
+gmaps = googlemaps.Client(key='AIzaSyAbpKnIGTYrxhME4vheUpoL8w_wJxof7mg')
 
-# center on Liberty Bell, add marker
-m = folium.Map(location=[39.949610, -75.150282], zoom_start=16)
-folium.Marker(
-    [39.949610, -75.150282], popup="Liberty Bell", tooltip="Liberty Bell"
-).add_to(m)
+#CRIANDO VARIÁVEIS DA MATRIZ
 
-# call to render Folium map in Streamlit
-st_data = st_folium(m, width=725)
+#inserindo as cidades de origem
+origem = ['natal','brasilia','sao paulo']
+#inserindo as cidades de destino
+destino = ['curitiba','rio de janeiro','belo horizonte']
+#criando um laço que vai imprimir uma distância para cada uma das rotas (cada origem para cada um dos destinos)
+for c_origem in origem:
+    for c_destino in destino:
+            consulta = gmaps.distance_matrix(c_origem, c_destino)
+            
+            print(consulta)
+            
+#TENHO QUE COLOCAR ESSE LAÇO PARA CRIAR UMA TABELA
+#A PARTIR DESSES DADOS DA TABELA, POSSO REALIZAR O PROBLEMA DO CAIXEIRO VIAJANTE.
