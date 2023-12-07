@@ -23,7 +23,7 @@ st.sidebar.title('Filtros')
 regiao = st.sidebar.selectbox('Região', regioes)
 
 if regiao == 'Brasil':
-regiao = ''
+    regiao = ''
 
 todos_os_anos = st.sidebar.checkbox('Dados de todo o período', value=True)
 if todos_os_anos:
