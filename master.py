@@ -113,7 +113,7 @@ with aba2:
         st.metric("Receita", formata_numero(dados['Preço'].sum(),'R$'))
         fig_receita_vendedores = px.bar(vendedores[['sum']].sort_values('sum', ascending = False).head(qtd_vendedores),
                                         x = 'sum',
-                                        y = vendedores[['sum']].sort_values('sum', ascending = False).head(qtd_vendedores).index
+                                        y = vendedores[['sum']].sort_values('sum', ascending = False).head(qtd_vendedores).index,
                                         text_auto = True,
                                         title = f'Top {qtd_vendedores} vendedores (receita)')
         st.plotly_chart(fig_receita_vendedores)
