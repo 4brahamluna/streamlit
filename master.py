@@ -72,7 +72,7 @@ fig_mapa_receita = px.scatter_geo(receita_estados,
 
 fig_receita_mensal = px.line(receita_mensal,
                              x = 'Mês',
-                             Y = 'Preço',
+                             y = 'Preço',
                              range_y = (0, receita_mensal.max()),
                              color = 'Ano',
                              line_dash = 'Ano',
